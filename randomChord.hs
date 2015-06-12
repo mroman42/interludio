@@ -1,4 +1,4 @@
-import Control.Monad
+import Control.Monad.Random
 import System.Random
 
 data Degree = I | II | III | IV | V | VI | VII
@@ -13,5 +13,13 @@ nextChordDist V   = [(I,3), (VI,1)]
 nextChordDist VI  = [(I,2), (II,1), (V,1)]
 nextChordDist VII = [(V,1)]
 
-nextChord :: Degree -> Degree
-nextChord = fromList . nextChordDist 
+nextChord :: Degree -> IO Degree
+nextChord = fromList . nextChordDist
+
+-- Is it necessary to use the IO monad?
+chords :: Int -> Degree -> IO [Degree]
+chords n a
+    | n==0       = return [a] 
+    | otherwise = do  x <- nextChord a
+                      ls <- chords (n-1) x
+                      return (a:ls)
