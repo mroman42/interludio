@@ -1,8 +1,8 @@
+module RandomChord where
+
 import Control.Monad.Random
 import System.Random
-
-data Degree = I | II | III | IV | V | VI | VII
-            deriving (Show, Eq)
+import Chords
 
 nextChordDist :: Degree -> [(Degree, Rational)]
 nextChordDist I   = [(II,1), (IV,1), (V,1), (VI,1)]
