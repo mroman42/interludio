@@ -10,7 +10,9 @@ data ChordMode = Maj  | Maj7 | Maj9 | Maj6
                | Dim  | Dim7
                | Dom7 | Dom9 | Dom7b9
                  deriving (Show, Eq)
-                 
+
+
+{- Intervals for a given chord mode. -}                 
 chordIntervals :: ChordMode -> [Int]
 chordIntervals Maj    = [4,3,5]
 chordIntervals Maj7   = [4,3,4,1]
@@ -27,15 +29,12 @@ chordIntervals Dom7   = [4,3,3,2]
 chordIntervals Dom9   = [4,3,3,4]
 chordIntervals Dom7b9 = [4,3,3,3]
 
-scaleChords :: Mode -> [ChordMode]
-scaleChords Major = [Maj, Min, Min, Maj, Dom7, Min, Dim]
-scaleChords Minor = [Min, Dim, Maj, Min, Dom7, Maj, Maj]
-
 chordAbsBase :: ChordMode -> AbsPitch -> [AbsPitch]
 chordAbsBase m n = map (+n) $ scanl (+) 0 (chordIntervals m)
 
 absBase :: Dur -> [AbsPitch] -> [Music Pitch]
 absBase d = map (Prim . Note d . pitch)
 
+-- Chord to music
 cchord :: ChordMode -> AbsPitch -> Dur -> Music Pitch
 cchord mode pitch dur = foldl (:=:) (rest 0) $ absBase dur (chordAbsBase mode pitch)
