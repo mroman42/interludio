@@ -19,7 +19,7 @@ nextChord = fromList . nextChordDist
 -- Is it necessary to use the IO monad?
 chords :: Int -> Degree -> IO [Degree]
 chords n a
-    | n==0       = return [a] 
+    | n==0       = return [a]
     | otherwise = do  x <- nextChord a
                       ls <- chords (n-1) x
                       return (a:ls)
