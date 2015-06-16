@@ -5,6 +5,8 @@ import RandomChord
 import Chords
 import Scale
 import Bassline
+import Tempo
+import Arpeggio
 
 randomSequence :: IO ()
 randomSequence = do d <- chords 6 I
@@ -30,7 +32,7 @@ randomSeqWithBass = do let bas = 60
                        let music = foldl (:+:) (rest 0) musicl
                     
                        -- Bassline
-                       let b = bassline bass wn d
+                       let b = bassline bass wn c
                        
                        let commusic = music :=: b
                        print c
