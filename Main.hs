@@ -7,6 +7,7 @@ import Scale
 import Bassline
 import Tempo
 import Arpeggio
+import Drumkit
 
 randomSequence :: IO ()
 randomSequence = do d <- chords 6 I
@@ -51,16 +52,19 @@ randomPraeludium = do  let bas = 60
                        let m = map (scaleChord Major) c
                        let n = map (\x -> scaleNote Major x bas) c
                        let musicl = map (flip (uncurry cchord) dur) (zip m n)
-                       let music = foldl (:+:) (rest 0) musicl
+                       let music = line musicl
 
                        -- Bassline
                        let bmusic = bassline bass wn c
 
                        -- Arpeggio
                        let arp = map (flip (uncurry arpeggio) praeludium) (zip n m)
-                       let arpmusic = foldl (:+:) (rest 0) arp
+                       let arpmusic = line arp
 
-                       let commusic = music :=: arpmusic :=: bmusic
+                       -- Drums
+                       let drums = line (replicate 16 pattern)
+
+                       let commusic = chord [music, arpmusic, bmusic, drums]
                        print c
                        play commusic
                        writeMidi "main.midi" music
