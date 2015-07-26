@@ -42,15 +42,16 @@ randomSeqWithBass = do let bas = 60
 
 
 randomPraeludium :: IO ()
-randomPraeludium = do  let bas = 60
-                       let bass = 60-12*2
+randomPraeludium = do  let bas = 62
+                       let bass = bas-12*2
                        let dur = wn
+                       let mod = Major
 
                        -- Chords
                        d <- chords 6 I
                        let c = d ++ [V,I]
-                       let m = map (scaleChord Major) c
-                       let n = map (\x -> scaleNote Major x bas) c
+                       let m = map (scaleChord mod) c
+                       let n = map (\x -> scaleNote mod x bas) c
                        let musicl = map (flip (uncurry cchord) dur) (zip m n)
                        let music = line musicl
 
@@ -64,6 +65,7 @@ randomPraeludium = do  let bas = 60
                        -- Drums
                        let drums = line (replicate 16 pattern)
 
+                       -- Total
                        let commusic = chord [music, arpmusic, bmusic, drums]
                        print c
                        play commusic
