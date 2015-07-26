@@ -19,3 +19,7 @@ following dependencies are necessary:
 To get the sound working, **qsynth** has to be connected to the *MIDI Through*
 output in the JACK server. This can be done in the *connections tab* of the *JACK
 Audio Connection Kit*.
+
+When the music finishes, the output is written into `main.midi`. If the above
+does not work, the music can be listen in this file with a music player
+supporting MIDI.
