@@ -2,10 +2,10 @@ module Main where
 
 import Euterpea
 import RandomChord
-import Chords
-import Scale
+import Theory.Chords
+import Theory.Scale
+import Theory.Tempo
 import Bassline
-import Tempo
 import Arpeggio
 import Drumkit
 

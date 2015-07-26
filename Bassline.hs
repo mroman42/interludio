@@ -1,8 +1,8 @@
 module Bassline where
 
 import Euterpea
-import Chords
-import Scale
+import Theory.Chords
+import Theory.Scale
 
 
 -- | Given a base note and a duration, creates a melodic

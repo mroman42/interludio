@@ -1,7 +1,7 @@
 module Arpeggio where
 
 import Euterpea
-import Chords
+import Theory.Chords
 
 type Motif = [(Int,Dur)]
 

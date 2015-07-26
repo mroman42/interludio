@@ -2,7 +2,7 @@ module RandomChord where
 
 import Control.Monad.Random
 import System.Random
-import Chords
+import Theory.Chords
 
 
 -- | Probability distribution of the next chord given one.
