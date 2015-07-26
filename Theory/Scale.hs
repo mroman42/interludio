@@ -1,7 +1,8 @@
-module Scale where
+module Theory.Scale where
 
 import Euterpea
-import Chords
+import Theory.Chords
+import Theory.Tonality
 
 -- | Intervals of the Major/Minor scale
 scaleIntervals :: Mode -> [Int]

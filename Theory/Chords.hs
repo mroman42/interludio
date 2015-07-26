@@ -1,6 +1,7 @@
-module Chords where
+module Theory.Chords where
 
 import Euterpea
+import Theory.Tonality
 
 -- | Degrees of a common 7-note scale.
 data Degree = I | II | III | IV | V | VI | VII
