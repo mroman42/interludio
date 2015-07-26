@@ -56,11 +56,11 @@ randomPraeludium = do  let bas = 62
                        let music = line musicl
 
                        -- Bassline
-                       let bmusic = Modify (Instrument ReedOrgan) $ bassline mod bass wn c
+                       let bmusic = Modify (Instrument Contrabass) $ bassline mod bass wn c
 
                        -- Arpeggio
                        let arp = map (flip (uncurry arpeggio) praeludium) (zip n m)
-                       let arpmusic = Modify (Instrument Banjo) $ line arp
+                       let arpmusic = Modify (Instrument AcousticGrandPiano) $ line arp
 
                        -- Drums
                        let drums = line (replicate 16 pattern)
