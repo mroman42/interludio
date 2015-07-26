@@ -1,3 +1,7 @@
 module Theory.Tempo where
 
-data Measure = M44 | M34
+import Euterpea
+
+data TimeSignature = TimeSignature { beats :: Int
+                                   , value :: Dur
+                                   } deriving (Eq)
