@@ -2,9 +2,12 @@ module Chords where
 
 import Euterpea
 
+-- | Degrees of a common 7-note scale.
 data Degree = I | II | III | IV | V | VI | VII
             deriving (Show, Eq, Enum)
 
+
+-- | Modes of a chord.
 data ChordMode = Maj  | Maj7 | Maj9 | Maj6
                | Min  | Min7 | Min9 | Min7b5 | MinM7
                | Dim  | Dim7
@@ -12,7 +15,7 @@ data ChordMode = Maj  | Maj7 | Maj9 | Maj6
                  deriving (Show, Eq)
 
 
-{- Intervals for a given chord mode. -}                 
+-- | Returns the intervals for a given chord mode.
 chordIntervals :: ChordMode -> [Int]
 chordIntervals Maj    = [4,3,5]
 chordIntervals Maj7   = [4,3,4,1]
@@ -29,12 +32,16 @@ chordIntervals Dom7   = [4,3,3,2]
 chordIntervals Dom9   = [4,3,3,4]
 chordIntervals Dom7b9 = [4,3,3,3]
 
+-- | Returns the absolute pitchs of a chord upon a given root
 chordAbsBase :: ChordMode -> AbsPitch -> [AbsPitch]
 chordAbsBase m n = map (+n) $ scanl (+) 0 (chordIntervals m)
 
+
+-- | Gives an uniform duration to a series of notes
 absBase :: Dur -> [AbsPitch] -> [Music Pitch]
 absBase d = map (Prim . Note d . pitch)
 
--- Chord to music
+
+-- | Returns the music of a chord upon a root with the given duration
 cchord :: ChordMode -> AbsPitch -> Dur -> Music Pitch
 cchord mode pitch dur = foldl (:=:) (rest 0) $ absBase dur (chordAbsBase mode pitch)
