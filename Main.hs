@@ -33,7 +33,7 @@ randomSeqWithBass = do let bas = 60
                        let music = foldl (:+:) (rest 0) musicl
                     
                        -- Bassline
-                       let b = bassline bass wn c
+                       let b = bassline Major bass wn c
                        
                        let commusic = music :=: b
                        print c
@@ -56,7 +56,7 @@ randomPraeludium = do  let bas = 62
                        let music = line musicl
 
                        -- Bassline
-                       let bmusic = Modify (Instrument ReedOrgan) $ bassline bass wn c
+                       let bmusic = Modify (Instrument ReedOrgan) $ bassline mod bass wn c
 
                        -- Arpeggio
                        let arp = map (flip (uncurry arpeggio) praeludium) (zip n m)
@@ -69,7 +69,7 @@ randomPraeludium = do  let bas = 62
                        let commusic = chord [music, arpmusic, bmusic, drums]
                        print c
                        play commusic
-                       writeMidi "main.midi" music
+                       writeMidi "main.midi" commusic
 
 main :: IO ()
 main = randomPraeludium
